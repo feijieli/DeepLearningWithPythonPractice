@@ -1,5 +1,5 @@
 # %%
-from keras.applications import VGG16
+from tensorflow.keras.applications import VGG16
 
 conv_base=VGG16(include_top=False,input_shape=(150,150,3))
 conv_base.summary()
@@ -7,7 +7,7 @@ conv_base.summary()
 # %%
 import os
 import numpy as np
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 base_dir='cats_and_dogs_small'
 train_dir=os.path.join(base_dir,'train')
@@ -46,8 +46,8 @@ validation_features = np.reshape(validation_features,(1000,4*4*512))
 test_features = np.reshape(test_features,(1000,4*4*512))
 
 #%%
-from keras import layers, models
-from keras import optimizers
+from tensorflow.keras import layers, models
+from tensorflow.keras import optimizers
 
 model = models.Sequential()
 model.add(layers.Dense(256,activation='relu',input_dim=4 * 4 * 512))
@@ -90,4 +90,5 @@ plt.title('Training and validation acc')
 plt.legend()
 
 plt.show()
+
 # %%

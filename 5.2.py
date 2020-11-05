@@ -15,44 +15,47 @@ test_dogs_dir= os.path.join(test_dir,'dogs')
 
 
 #%% 
-os.mkdir(base_dir)
-os.mkdir(train_dir)
-os.mkdir(validation_dir)
-os.mkdir(test_dir)
-os.mkdir(train_cats_dir)
-os.mkdir(train_dogs_dir)
-os.mkdir(validation_cats_dir)
-os.mkdir(validation_dogs_dir)
-os.mkdir(test_cats_dir)
-os.mkdir(test_dogs_dir)
+try:
+    os.mkdir(base_dir)
+    os.mkdir(train_dir)
+    os.mkdir(validation_dir)
+    os.mkdir(test_dir)
+    os.mkdir(train_cats_dir)
+    os.mkdir(train_dogs_dir)
+    os.mkdir(validation_cats_dir)
+    os.mkdir(validation_dogs_dir)
+    os.mkdir(test_cats_dir)
+    os.mkdir(test_dogs_dir)
 
-for fname in ['cat.{}.jpg'.format(i) for i in range(1000)]:
-    src = os.path.join(original_dataset_dir,fname)
-    dst = os.path.join(train_cats_dir,fname)
-    shutil.copyfile(src,dst)
+    for fname in ['cat.{}.jpg'.format(i) for i in range(1000)]:
+        src = os.path.join(original_dataset_dir,fname)
+        dst = os.path.join(train_cats_dir,fname)
+        shutil.copyfile(src,dst)
 
-for fname in ['cat.{}.jpg'.format(i) for i in range(1000,1500)]:
-    src = os.path.join(original_dataset_dir,fname)
-    dst = os.path.join(validation_cats_dir,fname)
-    shutil.copyfile(src,dst)
+    for fname in ['cat.{}.jpg'.format(i) for i in range(1000,1500)]:
+        src = os.path.join(original_dataset_dir,fname)
+        dst = os.path.join(validation_cats_dir,fname)
+        shutil.copyfile(src,dst)
 
-for fname in ['cat.{}.jpg'.format(i) for i in range(1500,2000)]:
-    src = os.path.join(original_dataset_dir,fname)
-    dst = os.path.join(test_cats_dir,fname)
-    shutil.copyfile(src,dst)
+    for fname in ['cat.{}.jpg'.format(i) for i in range(1500,2000)]:
+        src = os.path.join(original_dataset_dir,fname)
+        dst = os.path.join(test_cats_dir,fname)
+        shutil.copyfile(src,dst)
 
-for fname in ['dog.{}.jpg'.format(i) for i in range(1000)]:
-    src = os.path.join(original_dataset_dir,fname)
-    dst = os.path.join(train_dogs_dir,fname)
-    shutil.copyfile(src,dst)
-for fname in ['dog.{}.jpg'.format(i) for i in range(1000,1500)]:
-    src = os.path.join(original_dataset_dir,fname)
-    dst = os.path.join(validation_dogs_dir,fname)
-    shutil.copyfile(src,dst)
-for fname in ['dog.{}.jpg'.format(i) for i in range(1500,2000)]:
-    src = os.path.join(original_dataset_dir,fname)
-    dst = os.path.join(test_dogs_dir,fname)
-    shutil.copyfile(src,dst)
+    for fname in ['dog.{}.jpg'.format(i) for i in range(1000)]:
+        src = os.path.join(original_dataset_dir,fname)
+        dst = os.path.join(train_dogs_dir,fname)
+        shutil.copyfile(src,dst)
+    for fname in ['dog.{}.jpg'.format(i) for i in range(1000,1500)]:
+        src = os.path.join(original_dataset_dir,fname)
+        dst = os.path.join(validation_dogs_dir,fname)
+        shutil.copyfile(src,dst)
+    for fname in ['dog.{}.jpg'.format(i) for i in range(1500,2000)]:
+        src = os.path.join(original_dataset_dir,fname)
+        dst = os.path.join(test_dogs_dir,fname)
+        shutil.copyfile(src,dst)
+except:
+    print('文件已经准备就绪！')
     
 # %% 
 from tensorflow.keras import layers, models
@@ -93,15 +96,17 @@ validation_generator = test_datagen.flow_from_directory(
     class_mode='binary')
 
 #%%
+
+# Train the model
 history = model.fit(
     train_generator,
     steps_per_epoch=100,
-    epochs=10,
+    epochs=1,
     validation_data=validation_generator,
     validation_steps=50
 )
 
-model.save('cats_and_dogs_small_1.h5')
+model.save('h5/cats_and_dogs_small_1.h5')
 
 # %%
 import matplotlib.pyplot as plt
@@ -127,6 +132,3 @@ plt.title('Training and validation acc')
 plt.legend()
 
 plt.show()
-
-
-# %%
