@@ -1,5 +1,5 @@
 # %% 
-from keras.datasets import imdb
+from tensorflow.keras.datasets import imdb
 import tensorflow as tf
 
 (train_data, train_labels), (test_data,test_labels) = imdb.load_data(num_words=10000)
@@ -26,7 +26,7 @@ y_test = np.asarray(test_labels).astype('float32')
 
 
 # %%
-from keras import models, layers
+from tensorflow.keras import models, layers
 
 model = models.Sequential()
 model.add(layers.Dense(16,activation='relu',input_shape=(10000,)))
