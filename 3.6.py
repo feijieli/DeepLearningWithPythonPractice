@@ -59,7 +59,7 @@ print(all_scores)
 print(np.mean(all_scores))
 
 #%%
-num_epochs = 500
+num_epochs = 200
 all_mae_histories = []
 
 for i in range(k):
