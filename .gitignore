@@ -134,3 +134,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+jena_climate/jena_climate_2009_2016.csv
